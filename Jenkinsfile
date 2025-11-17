@@ -7,7 +7,10 @@ pipeline {
       steps {
         sh '''
           mkdir -p test-results
-          echo "<testsuite></testsuite>" > test-results/results.xml
+          cat > test-results/results.xml <<'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <testsuite name="dummy" tests="0" failures="0" errors="0" skipped="0"/>
+          EOF
           echo "No real tests run" > test-info.txt
         '''
       }
@@ -19,7 +22,7 @@ pipeline {
         sh '''
           mkdir -p dist
           echo "artifact content" > dist/artifact.txt
-          zip -j dist/artifact.zip dist/artifact.txt
+          tar -czf dist/artifact.tar.gz -C dist artifact.txt
         '''
       }
     }
