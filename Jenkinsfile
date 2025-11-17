@@ -7,10 +7,9 @@ pipeline {
       steps {
         sh '''
           mkdir -p test-results
-          cat > test-results/results.xml <<'EOF'
-          <?xml version="1.0" encoding="UTF-8"?>
-          <testsuite name="dummy" tests="0" failures="0" errors="0" skipped="0"/>
-          EOF
+          printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>' \
+            '<testsuite name="dummy" tests="0" failures="0" errors="0" skipped="0"/>' \
+            > test-results/results.xml
           echo "No real tests run" > test-info.txt
         '''
       }
