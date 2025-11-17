@@ -19,7 +19,7 @@ pipeline {
         sh '''
           mkdir -p dist
           echo "artifact content" > dist/artifact.txt
-          zip -r dist/artifact.zip dist/artifact.txt
+          zip -j dist/artifact.zip dist/artifact.txt
         '''
       }
     }
